@@ -7,6 +7,9 @@ import configparser
 
 app = Flask(__name__)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @app.route('/')
 def index():
@@ -43,7 +46,10 @@ def about():
 def search():
     # User inputs for search function
     if request.method == 'GET':
-        sub_name = request.args.get('InputSubreddit')
+        if request.args.get('InputSubreddit') != '':
+            sub_name = request.args.get('InputSubreddit')
+        else:
+            sub_name = 'all'
         key_name = request.args.get('InputKeyword')
 
         select_item = request.args.get('select-item')
@@ -85,7 +91,7 @@ def search():
                     results.pop()
                     urls.pop()
                     comments.pop()
-    except (prawcore.exceptions.Redirect, TypeError) as error:
+    except (prawcore.exceptions.Redirect, prawcore.exceptions.Forbidden, prawcore.exceptions.NotFound) as error:
         return render_template('index.html', error=error)
 
     # used zip function to combine 3 lists for iteration, urls, submission results, and submission comments
@@ -93,4 +99,4 @@ def search():
 
 if __name__ == '__main__':
 
-    app.run()
+    app.run(debug=True)
