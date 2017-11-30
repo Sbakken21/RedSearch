@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <div class="jumbotron text-center">
+        <h1>RedSearch</h1>
+        <p class="lead">A better way to search and browse reddit</p>
+    </div>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+            <span class="sr-only">Error:</span>
+            ERROR: Check that subreddit(s) is/are valid and separate subreddits using "," or "+"
+        </div>
+
+    {% endif %}
+    <div class="form-header text-center">
+        <h3>Search Front Page of Subreddit(s)</h3>
+    </div>
+
+    <form action= "{{ url_for('search') }}" method="GET">
+        <div class="form-group">
+            <label for="InputSubreddit">Subreddit(s)</label>
+            <input type="text" class="form-control" name="InputSubreddit" id="InputSubreddit" placeholder="cringe, livestreamfail, etc.">
+        </div>
+        <div class="form-group form-inline">
+            <label for="InputKeyword">Keyword(s)</label>
+            <input type="text" class="form-control" name="InputKeyword" id="InputKeyword" placeholder="cats, hats, etc.">
+            <select class="form-control" name="select-item">
+                <option value="Hot">Hot</option>
+                <option value="New">New</option>
+                <option value="Top">Top</option>
+            </select>
+            <label for="select-limit">Number of Results</label>
+            <select name="select-limit" class="form-control">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50" selected>50 (default)</option>
+                <option value="100">100</option>
+                <option value="1000">1000</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+
+        <div id="more-options" style="display: none;">
+            <label for="sub-filter">Subreddit(s) Filter</label>
+            <input type="text" class="form-control" name="sub-filter">
+            <label for="key-filter">Keyword(s) Filter</label>
+            <input type="text" class="form-control" name="key-filter">
+        </div>
+    </form>
+    <button id="optButton" onclick="optFunc(); myFunc()" class="btn btn-default option-button"><span><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></span>More Options</button>
+
+
+    </div>
+{% endblock %}

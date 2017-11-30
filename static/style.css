@@ -1,0 +1,8 @@
+.error {
+    display: inline;
+    overflow: visible;
+}
+
+.fa-caret-square-o-down, .fa-caret-square-o-up {
+    padding-right: 5px;
+}

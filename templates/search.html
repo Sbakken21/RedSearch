@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Search Results: </h1>
+    <table class="table table-striped">
+        {% for url, result, comment in reddit_info %}
+            <tr>
+                <td class="table-submission"><a href="{{ url }}" target="_blank">{{ result }}</a></td>
+                <td><a href="{{ comment }}" target="_blank">Comments</a></td>
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn RedditScraper2:app
