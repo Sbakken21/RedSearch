@@ -94,8 +94,8 @@ def search():
     except (prawcore.exceptions.Redirect, prawcore.exceptions.Forbidden, prawcore.exceptions.NotFound) as error:
         return render_template('index.html', error=error)
 
-    # used zip function to combine 3 lists for iteration, urls, submission results, and submission comments
-    return render_template('search.html', reddit_info = zip(urls, results, comments))
+    # used zip function to combine 3 lists for iteration: urls, submission results, and submission comments
+    return render_template('search.html', reddit_info = zip(urls, results, comments), results = results)
 
 if __name__ == '__main__':
 
