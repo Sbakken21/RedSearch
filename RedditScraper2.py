@@ -12,12 +12,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-# Reddit API info
 
-# Check for production env
 
+# Production environment variable
 is_prod = os.environ.get('IS_HEROKU', None)
 
+# Check for production env, use either heroku var or config.ini var
 if is_prod:
     client_id= os.environ.get('client_id')
     client_secret = os.environ.get('secret')
